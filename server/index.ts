@@ -23,7 +23,7 @@ const WA = "https://wa.me/447766285137?text=Hola%20Osvaldo%2C%20vi%20la%20p%C3%A
 const CLARITO = "https://clarito.oatech.com.co";
 const ACOMPANAPP = "https://acompanapp.com";
 const DEMO = "https://demo.oatech.com.co";
-const FOTOS = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@fotos-v1/fotos";
+const FOTOS = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@af02bf2464010c5938e0e0bcca666c517b38307b/fotos";
 const F = (n: string) => `${FOTOS}/${n}.avif`;
 
 /* ───────────────────────── Estilos compartidos ───────────────────────── */

@@ -162,6 +162,27 @@ main{margin-left:var(--rail)}
 .card .arrow{position:absolute;right:26px;bottom:26px;color:var(--ac);transition:transform .25s}
 .card:hover .arrow{transform:translate(4px,-4px)}
 .ch-foot{display:flex;gap:12px;flex-wrap:wrap;margin-top:50px;align-items:center}
+/* IA sin humo */
+.verd{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.verd>div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 26px 30px;position:relative}
+.verd i{display:block;width:12px;height:12px;border-radius:50%;margin-bottom:18px}
+.verd .mono{color:var(--dim);font-size:10.5px}
+.verd b{display:block;font-family:Archivo,sans-serif;font-stretch:68%;font-weight:800;text-transform:uppercase;font-size:28px;line-height:1;margin:8px 0 10px}
+.verd p{color:var(--muted);font-size:14.5px}
+.iacost{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;margin-top:80px;align-items:start}
+.calc2{border:1px solid var(--line2);background:var(--bg2);padding:28px}
+.calc2 .cap{color:var(--ac);margin-bottom:20px}
+.calc2 .in{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px}
+.calc2 label{display:grid;gap:6px}
+.calc2 label span{font-size:13px;color:var(--muted)}
+.calc2 input{background:transparent;border:0;border-bottom:1px solid var(--line2);color:var(--ink);font:inherit;font-size:18px;padding:8px 0;outline:none;border-radius:0;font-variant-numeric:tabular-nums}
+.calc2 input:focus{border-color:var(--ac)}
+.calc2 .out{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.calc2 .out>div{border:1px solid var(--line);padding:14px 16px}
+.calc2 .out .mono{display:block;color:var(--dim);font-size:10.5px;margin-bottom:6px}
+.calc2 .out b{font-family:Archivo,sans-serif;font-stretch:68%;font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.calc2 .out .v{grid-column:1/-1;border-color:var(--ac);background:rgba(60,198,234,.06)}
+.calc2 .out .v b{font-family:Inter,sans-serif;font-size:17px;font-weight:600;line-height:1.4}
 /* proceso */
 .steps4{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
 .steps4>div{padding:28px 26px 10px 0}
@@ -237,6 +258,8 @@ footer a{color:var(--muted)}
   .ch-head{grid-template-columns:1fr;gap:10px}
   .ch-num{font-size:72px}
   .hero .term{display:none}
+  .verd{grid-template-columns:1fr 1fr}
+  .iacost{grid-template-columns:1fr;gap:40px}
   .steps4{grid-template-columns:1fr 1fr}
   .steps4>div:nth-child(3){padding-left:0;border-left:0}
 }
@@ -253,6 +276,8 @@ footer a{color:var(--muted)}
   .wrap{padding:0 20px}
   .hero .inner{padding:0 20px 110px}
   .hero .term{display:none}
+  .verd{grid-template-columns:1fr}
+  .calc2 .in,.calc2 .out{grid-template-columns:1fr}
   .steps4{grid-template-columns:1fr}
   .steps4>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
   .hero .kick span{display:none}
@@ -402,6 +427,7 @@ function contactBlock(opts: string, heading: string, intro: string, num: string)
 
 /* ───────────────────────── Página de inicio ───────────────────────── */
 const HOME_NAV = `
+<a href="#ia" data-sec="ia">IA sin humo</a>
 <a href="#servicios" data-sec="servicios">Qué hacemos</a>
 <a href="#proceso" data-sec="proceso">Cómo trabajamos</a>
 <a href="/farma">Salud y farma</a>
@@ -422,10 +448,10 @@ const HOME_BODY = `
     <div class="ln mono"><b>05</b> en producción <span class="cursor"></span></div>
   </div>
   <div class="inner">
-    <div class="kick mono rv"><b>OA Tech</b><span>Fábrica de software · Hecho en Colombia</span></div>
+    <div class="kick mono rv"><b>OA Tech</b><span>Estudio de productos digitales e IA · Hecho en Colombia</span></div>
     <h1 class="disp rv d1">Software<span class="l2">con experiencia.</span></h1>
     <div class="row">
-      <p class="lead rv d2">Somos una fábrica de software que convierte 30 años de experiencia en tecnología, datos e industria en aplicaciones que funcionan: apps móviles, plataformas web, tableros de datos y soluciones con inteligencia artificial, a la medida de tu negocio.</p>
+      <p class="lead rv d2">Somos un estudio de productos digitales que convierte 30 años de experiencia en tecnología, datos e industria en aplicaciones que funcionan: apps móviles, plataformas web, tableros de datos y soluciones con inteligencia artificial, a la medida de tu negocio.</p>
       <div class="ctas rv d3">
         <a class="btn" href="#servicios">Ver qué hacemos ↓</a>
         <a class="btn ghost" href="#contacto">Cuéntanos tu idea</a>
@@ -435,14 +461,59 @@ const HOME_BODY = `
 </section>
 
 <div class="strip" aria-hidden="true"><div class="t">
-  <span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
-  <span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
+  <span>IA sin humo<i>✦</i></span><span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
+  <span>IA sin humo<i>✦</i></span><span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
 </div></div>
 
-<section class="ch" id="servicios" data-ch="01" data-name="Qué hacemos">
+<section class="ch" id="ia" data-ch="01" data-name="IA sin humo">
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">01</div>
+      <div>
+        <div class="ch-label mono rv">IA sin humo · Diagnóstico</div>
+        <h2 class="disp rv d1">Antes de comprar IA,<br><span class="ac">decide con números.</span></h2>
+        <p class="intro rv d2">Hoy todo el mundo quiere hacer IA. Nosotros te decimos dónde sí sirve, dónde no y cuánto cuesta de verdad. Muchas veces la respuesta no es un agente: es una automatización sencilla, la herramienta que ya pagas o, primero, ordenar tus datos.</p>
+      </div>
+    </div>
+    <div class="verd rv">
+      <div><i style="background:#f08a5d"></i><span class="mono">Veredicto 1</span><b>No hacer nada (todavía)</b><p>Poco volumen o datos en desorden: primero lo primero.</p></div>
+      <div><i style="background:#f2c35d"></i><span class="mono">Veredicto 2</span><b>Automatización clásica</b><p>Reglas fijas: más barata y más confiable que un agente.</p></div>
+      <div><i style="background:#3cc6ea"></i><span class="mono">Veredicto 3</span><b>La herramienta que ya pagas</b><p>Tu ERP, CRM o suite de oficina ya trae IA. Actívala y mídela.</p></div>
+      <div><i style="background:#3ce6a0"></i><span class="mono">Veredicto 4</span><b>Agente de IA</b><p>Entrada variable, objetivo claro y una persona que revisa las excepciones.</p></div>
+    </div>
+    <div class="iacost">
+      <div class="rv">
+        <p class="mani" style="font-size:clamp(30px,3.6vw,52px)">Los tokens casi<br>nunca son el problema.</p>
+        <p class="intro" style="margin-top:20px">Operar un agente que revisa 1.000 facturas al mes cuesta cerca de US$70. Lo que decide si se paga es lo demás: la implementación, el mantenimiento, el porcentaje que de verdad se automatiza, el volumen y el costo de equivocarse.</p>
+        <p class="note">Ejemplo ilustrativo con supuestos. En un diagnóstico lo medimos con casos reales.</p>
+      </div>
+      <div class="calc2 rv d1" id="calculadora">
+        <div class="mono cap">Calculadora · ¿En cuántos meses se paga?</div>
+        <div class="in">
+          <label><span>Costo mensual del cargo (COP)</span><input id="c1" type="number" min="0" step="50000" value="2850000" inputmode="numeric"></label>
+          <label><span>% del trabajo automatizable</span><input id="c2" type="number" min="0" max="100" step="5" value="70" inputmode="numeric"></label>
+          <label><span>Costo mensual de operar (COP)</span><input id="c3" type="number" min="0" step="50000" value="650000" inputmode="numeric"></label>
+          <label><span>Inversión de implementación (COP)</span><input id="c4" type="number" min="0" step="500000" value="10000000" inputmode="numeric"></label>
+        </div>
+        <div class="out" aria-live="polite">
+          <div><span class="mono">Ahorro neto al mes</span><b id="o2">–</b></div>
+          <div><span class="mono">Se recupera en</span><b id="o3">–</b></div>
+          <div class="v"><span class="mono">Lectura rápida</span><b id="o4">–</b></div>
+        </div>
+        <p class="note" style="margin-top:14px">Cálculo simple, sin impuestos ni costo del dinero: sirve para saber si vale la pena estudiar el caso.</p>
+      </div>
+    </div>
+    <div class="ch-foot rv">
+      <a class="btn" href="https://decide.oatech.com.co" target="_blank" rel="noopener">Ver el diagnóstico completo ↗</a>
+      <a class="btn ghost" href="#contacto">Revisar mi caso en 30 minutos</a>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="servicios" data-ch="02" data-name="Qué hacemos">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num rv">02</div>
       <div>
         <div class="ch-label mono rv">Qué hacemos</div>
         <h2 class="disp rv d1">De la idea<br>a la app en uso.</h2>
@@ -461,10 +532,10 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="proceso" data-ch="02" data-name="Cómo trabajamos">
+<section class="ch" id="proceso" data-ch="03" data-name="Cómo trabajamos">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-num rv">02</div>
+      <div class="ch-num rv">03</div>
       <div><div class="ch-label mono rv">Cómo trabajamos</div></div>
     </div>
     <p class="mani rv">Primero el problema.<br><span class="o">Después la herramienta.</span></p>
@@ -478,10 +549,10 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="experiencia" data-ch="03" data-name="Experiencia">
+<section class="ch" id="experiencia" data-ch="04" data-name="Experiencia">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-num rv">03</div>
+      <div class="ch-num rv">04</div>
       <div>
         <div class="ch-label mono rv">Por qué OA Tech</div>
         <h2 class="disp rv d1">Treinta años<br>resolviendo problemas reales.</h2>
@@ -502,10 +573,10 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="farma" data-ch="04" data-name="Salud y farma">
+<section class="ch" id="farma" data-ch="05" data-name="Salud y farma">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-num rv">04</div>
+      <div class="ch-num rv">05</div>
       <div>
         <div class="ch-label mono rv">Especialidad · Salud y farma</div>
         <h2 class="disp rv d1">Donde más<br>experiencia tenemos.</h2>
@@ -526,7 +597,7 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="sobre-mi" data-ch="05" data-name="Sobre mí">
+<section class="ch" id="sobre-mi" data-ch="06" data-name="Sobre mí">
   <div class="wrap">
     <div class="about">
       <div>
@@ -537,7 +608,7 @@ const HOME_BODY = `
       </div>
       <div>
         <p class="rv">Pasé 30 años liderando tecnología y transformación digital en una multinacional farmacéutica francesa: plataformas de visita médica, analítica de pacientes, cadena de suministro y presupuestos en Latinoamérica.</p>
-        <p class="rv d1">Hoy dirijo OA Tech, una fábrica de software que pone esa experiencia al servicio de empresas y organizaciones que necesitan aplicaciones bien hechas: que se usen, que se puedan mantener y que resuelvan un problema real.</p>
+        <p class="rv d1">Hoy dirijo OA Tech, un estudio de productos digitales e IA que pone esa experiencia al servicio de empresas y organizaciones que necesitan aplicaciones bien hechas: que se usen, que se puedan mantener y que resuelvan un problema real.</p>
         <ul class="creds rv d2">
           <li><span class="mono">01</span>30 años en tecnología y transformación digital</li>
           <li><span class="mono">02</span>Apps móviles, plataformas web y soluciones con IA</li>
@@ -551,16 +622,16 @@ const HOME_BODY = `
   </div>
 </section>
 ${contactBlock(
-  `<option>Una app móvil</option><option>Una plataforma web</option><option>Datos y tableros</option><option>Inteligencia artificial o automatización</option><option>Un MVP o prototipo</option><option>Datos e IA para salud y farma</option><option>Veeva y CRM</option><option>Reporte de transparencia</option><option>Otro</option>`,
+  `<option>Diagnóstico de IA (¿me conviene?)</option><option>Una app móvil</option><option>Una plataforma web</option><option>Datos y tableros</option><option>Inteligencia artificial o automatización</option><option>Un MVP o prototipo</option><option>Datos e IA para salud y farma</option><option>Veeva y CRM</option><option>Reporte de transparencia</option><option>Otro</option>`,
   "Cuéntanos<br>tu idea.",
   "30 minutos para entender lo que necesitas y decirte con honestidad cómo lo haríamos, cuánto tomaría y si somos el equipo indicado. Te respondo personalmente.",
-  "06"
+  "07"
 )}
 <div class="bigword" aria-hidden="true">OA Tech</div>
 <footer>
   <div class="wrap">
-    <div>© 2026 OA Tech · Fábrica de software · Hecho en Colombia · Algunas fotos: Unsplash</div>
-    <div><a href="#servicios">Qué hacemos</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">¿IA para tu empresa?</a></div>
+    <div>© 2026 OA Tech · Estudio de productos digitales e IA · Hecho en Colombia · Algunas fotos: Unsplash</div>
+    <div><a href="#ia">IA sin humo</a> · <a href="#servicios">Qué hacemos</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">Diagnóstico de IA</a></div>
   </div>
 </footer>`;
 
@@ -570,11 +641,26 @@ const HOME_JS = `
   var old=["una-sola-verdad","rotacion-adherencia","casos","salud","transparencia","diagnostico","donvital"];
   var h=(location.hash||"").slice(1);
   if(old.indexOf(h)>-1) location.replace("/farma#"+h);
+})();
+(function(){
+  var ids=["c1","c2","c3","c4"];
+  if(!document.getElementById("c1")) return;
+  function v(id){var x=parseFloat(document.getElementById(id).value);return isFinite(x)&&x>0?x:0}
+  function cop(n){return (n<0?"-$":"$")+Math.round(Math.abs(n)).toLocaleString("es-CO")}
+  function calc(){
+    var neto=v("c1")*Math.min(v("c2"),100)/100-v("c3"), inv=v("c4"), t3, t4;
+    document.getElementById("o2").textContent=cop(neto);
+    if(neto<=0){t3="No se recupera";t4="El costo mensual supera el ahorro: así no es viable."}
+    else{var m=inv/neto;t3=(m<1?"menos de 1":m.toLocaleString("es-CO",{maximumFractionDigits:1}))+" meses";
+      t4=m<=12?"Se paga en menos de un año: vale la pena estudiarlo.":(m<=24?"Se paga, pero despacio: revisa volumen e implementación.":"Tarda más de dos años: probablemente no conviene así.")}
+    document.getElementById("o3").textContent=t3;document.getElementById("o4").textContent=t4;
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener("input",calc)});calc();
 })();`;
 
 const HOME = shell({
-  title: "OA Tech · Fábrica de software en Colombia",
-  desc: "OA Tech es una fábrica de software con 30 años de experiencia en tecnología, datos e industria: apps móviles, plataformas web, tableros de datos, inteligencia artificial y automatización a la medida.",
+  title: "OA Tech · Estudio de productos digitales e IA",
+  desc: "OA Tech es un estudio de productos digitales e IA con 30 años de experiencia en tecnología, datos e industria: apps móviles, plataformas web, tableros de datos, inteligencia artificial y automatización a la medida.",
   nav: HOME_NAV,
   body: HOME_BODY,
   extraJs: HOME_JS,

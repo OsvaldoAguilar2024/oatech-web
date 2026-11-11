@@ -66,19 +66,31 @@ main{margin-left:var(--rail)}
 .btn.nar:hover{box-shadow:0 10px 30px -10px var(--nar)}
 /* héroe */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero .photo{position:absolute;inset:0;overflow:hidden}
-.hero .photo img{width:100%;height:100%;object-fit:cover;object-position:right center;filter:contrast(1.05) brightness(.82);transform:scale(1.04);animation:drift 26s ease-in-out infinite alternate}
-.hero .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,12,.85) 0%,rgba(7,9,12,.35) 45%,transparent 70%),linear-gradient(180deg,rgba(7,9,12,.55) 0%,transparent 25%,transparent 55%,var(--bg) 100%)}
-.hero .glow{position:absolute;inset:0;background:radial-gradient(700px 420px at 15% 85%,rgba(60,198,234,.12),transparent 70%)}
+.hero .gridbg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse at 70% 40%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse at 70% 40%,#000 10%,transparent 75%);animation:gridmove 30s linear infinite}
+@keyframes gridmove{to{background-position:80px 80px,80px 80px}}
+.hero .term{position:absolute;right:5%;top:15%;width:min(400px,30vw);border:1px solid var(--line2);background:rgba(12,16,21,.75);backdrop-filter:blur(8px);box-shadow:0 30px 80px -30px rgba(60,198,234,.35)}
+.hero .term .bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.hero .term .bar i{width:9px;height:9px;border-radius:50%;background:var(--line2)}
+.hero .term .bar i:first-child{background:var(--ac)}
+.hero .term .bar span{margin-left:auto;color:var(--dim);font-size:10.5px}
+.hero .term .ln{padding:12px 16px;border-bottom:1px dashed var(--line);color:var(--muted);display:flex;gap:14px;align-items:center;font-size:12.5px;opacity:0;animation:lnin .6s forwards}
+.hero .term .ln:last-child{border-bottom:0;color:var(--ink)}
+.hero .term .ln b{color:var(--dim);font-weight:400}
+.hero .term .ln em{margin-left:auto;font-style:normal;color:#5ed39a}
+.hero .term .ln:nth-child(2){animation-delay:.8s}.hero .term .ln:nth-child(3){animation-delay:1.3s}.hero .term .ln:nth-child(4){animation-delay:1.8s}.hero .term .ln:nth-child(5){animation-delay:2.3s}.hero .term .ln:nth-child(6){animation-delay:2.8s}
+.hero .term .cursor{margin-left:auto;width:9px;height:16px;background:var(--ac);animation:blink 1s steps(1) infinite}
+@keyframes lnin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:0}}
+@media (max-height:780px){.hero .term{display:none}}
+.hero .glow{position:absolute;inset:0;background:radial-gradient(800px 500px at 75% 30%,rgba(60,198,234,.16),transparent 70%),radial-gradient(700px 420px at 10% 90%,rgba(12,80,136,.35),transparent 70%)}
 .hero .inner{position:relative;width:100%;padding:120px 36px 120px;max-width:1400px;margin:0 auto}
-.hero h1{font-size:clamp(52px,min(8.4vw,17vh),150px)}
+.hero h1{font-size:clamp(52px,min(10vw,19vh),170px)}
 .hero h1 .l2{display:block;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
 .hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-top:34px;flex-wrap:wrap}
 .hero .lead{max-width:560px;color:#c9d1d9;font-size:19px}
 .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
 .hero .kick{margin-bottom:22px;display:flex;gap:14px;align-items:center;color:var(--muted)}
 .hero .kick b{color:var(--ac);font-weight:500}
-@keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.1) translate(-1%,-1%)}}
 /* cinta */
 .strip{border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0;background:var(--bg2)}
 .strip .t{display:inline-block;animation:slide 80s linear infinite}
@@ -142,6 +154,14 @@ main{margin-left:var(--rail)}
 .card .arrow{position:absolute;right:26px;bottom:26px;color:var(--ac);transition:transform .25s}
 .card:hover .arrow{transform:translate(4px,-4px)}
 .ch-foot{display:flex;gap:12px;flex-wrap:wrap;margin-top:50px;align-items:center}
+/* proceso */
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.steps4>div{padding:28px 26px 10px 0}
+.steps4>div+div{padding-left:26px;border-left:1px solid var(--line)}
+.steps4 .disp{font-size:64px;color:var(--ac)}
+.steps4 b{display:block;margin:12px 0 6px;font-size:19px}
+.steps4 p{color:var(--muted);font-size:15px}
+.steps4 .t{display:block;margin-top:14px;color:var(--dim);font-size:11px}
 /* manifiesto */
 .mani{font-family:Archivo,sans-serif;font-stretch:68%;font-weight:800;text-transform:uppercase;font-size:clamp(40px,6.4vw,96px);line-height:1.04}
 .mani .o{color:transparent;-webkit-text-stroke:1.2px var(--ink)}
@@ -208,6 +228,9 @@ footer a{color:var(--muted)}
   .grid3{grid-template-columns:1fr}
   .ch-head{grid-template-columns:1fr;gap:10px}
   .ch-num{font-size:72px}
+  .hero .term{display:none}
+  .steps4{grid-template-columns:1fr 1fr}
+  .steps4>div:nth-child(3){padding-left:0;border-left:0}
 }
 @media (max-width:760px){
   :root{--rail:0px}
@@ -221,9 +244,9 @@ footer a{color:var(--muted)}
   .top nav a.cta{margin-top:12px;text-align:center;border:0}
   .wrap{padding:0 20px}
   .hero .inner{padding:0 20px 110px}
-  .hero .photo{bottom:auto;height:64%}
-  .hero .photo img{object-position:72% center}
-  .hero .photo::after{background:linear-gradient(180deg,rgba(7,9,12,.45) 0%,transparent 30%,transparent 50%,var(--bg) 100%)}
+  .hero .term{display:none}
+  .steps4{grid-template-columns:1fr}
+  .steps4>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
   .hero .kick span{display:none}
   .hero .inner{padding-top:100px}
   .ch{padding:90px 0}
@@ -371,86 +394,117 @@ function contactBlock(opts: string, heading: string, intro: string, num: string)
 
 /* ───────────────────────── Página de inicio ───────────────────────── */
 const HOME_NAV = `
-<a href="#proyectos" data-sec="apps">Qué hacemos</a>
+<a href="#servicios" data-sec="servicios">Qué hacemos</a>
+<a href="#proceso" data-sec="proceso">Cómo trabajamos</a>
 <a href="/farma">Salud y farma</a>
 <a href="#sobre-mi" data-sec="sobre-mi">Sobre mí</a>
-<a href="#contacto" class="cta">Conversemos</a>`;
+<a href="#contacto" class="cta">Cuéntanos tu idea</a>`;
 
 const HOME_BODY = `
 <section class="hero" id="inicio" data-ch="00" data-name="OA Tech">
+  <div class="gridbg" aria-hidden="true"></div>
   <div class="glow" aria-hidden="true"></div>
-  <div class="photo" aria-hidden="true"><img src="${F("hero")}" alt="" fetchpriority="high"></div>
+  <div class="term rv d2" aria-hidden="true">
+    <div class="bar"><i></i><i></i><i></i><span class="mono">oatech ~ proyecto</span></div>
+    <div class="ln mono"><b>01</b> descubrimiento <em>listo</em></div>
+    <div class="ln mono"><b>02</b> prototipo <em>listo</em></div>
+    <div class="ln mono"><b>03</b> app móvil + web <em>listo</em></div>
+    <div class="ln mono"><b>04</b> datos e IA <em>listo</em></div>
+    <div class="ln mono"><b>05</b> en producción <span class="cursor"></span></div>
+  </div>
   <div class="inner">
-    <div class="kick mono rv"><b>OA Tech</b><span>Estudio de productos digitales · Hecho en Colombia</span></div>
-    <h1 class="disp rv d1">Tecnología<span class="l2">que acompaña.</span></h1>
+    <div class="kick mono rv"><b>OA Tech</b><span>Fábrica de software · Hecho en Colombia</span></div>
+    <h1 class="disp rv d1">Software<span class="l2">con experiencia.</span></h1>
     <div class="row">
-      <p class="lead rv d2">Diseño y construyo apps que ayudan a personas reales en su día a día: niños que necesitan ver su día claro, mayores que quieren seguir haciendo las cosas a su manera y pacientes que necesitan seguir su tratamiento.</p>
+      <p class="lead rv d2">Somos una fábrica de software que convierte 30 años de experiencia en tecnología, datos e industria en aplicaciones que funcionan: apps móviles, plataformas web, tableros de datos y soluciones con inteligencia artificial, a la medida de tu negocio.</p>
       <div class="ctas rv d3">
-        <a class="btn" href="#proyectos">Ver qué hacemos ↓</a>
-        <a class="btn ghost" href="#contacto">Conversemos</a>
+        <a class="btn" href="#servicios">Ver qué hacemos ↓</a>
+        <a class="btn ghost" href="#contacto">Cuéntanos tu idea</a>
       </div>
     </div>
   </div>
 </section>
 
 <div class="strip" aria-hidden="true"><div class="t">
-  <span>Apps que acompañan<i>✦</i></span><span>Niños y familias<i>✦</i></span><span>Personas mayores<i>✦</i></span><span>Datos e IA para salud<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
-  <span>Apps que acompañan<i>✦</i></span><span>Niños y familias<i>✦</i></span><span>Personas mayores<i>✦</i></span><span>Datos e IA para salud<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
+  <span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
+  <span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
 </div></div>
 
-<div id="proyectos"></div>
-<section class="ch" id="apps" data-ch="01" data-name="Apps que acompañan">
+<section class="ch" id="servicios" data-ch="01" data-name="Qué hacemos">
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">01</div>
       <div>
-        <div class="ch-label mono rv">Lo que construimos</div>
-        <h2 class="disp rv d1">Apps que acompañan<br>el día a día.</h2>
-        <p class="intro rv d2">Diseñamos y desarrollamos apps para personas que necesitan un apoyo sencillo para vivir su día con más autonomía, y para las familias, terapeutas y organizaciones que las acompañan.</p>
+        <div class="ch-label mono rv">Qué hacemos</div>
+        <h2 class="disp rv d1">De la idea<br>a la app en uso.</h2>
+        <p class="intro rv d2">Diseñamos, construimos y mantenemos software para empresas, fundaciones, instituciones de salud y emprendedores. Una sola mano desde la idea hasta que la gente lo usa todos los días.</p>
       </div>
     </div>
-    <div class="grid2 duo">
-      <div class="card media rv">
-        <div class="frame"><img src="${F("ninos")}" alt="Niño siguiendo su rutina de la mañana en una tablet mientras su mamá lo mira desde la puerta" loading="lazy"></div>
-        <div class="k mono"><span>A</span><span style="color:var(--sol)">Niños y familias</span></div>
-        <h3>Para niños que necesitan ver su día claro</h3>
-        <ul><li>Rutinas paso a paso con dibujos grandes y voz</li><li>Anticipar cambios: primero esto, después aquello</li><li>Pedir ayuda aunque cueste hablar</li><li>La familia y el terapeuta acompañan desde el celular</li></ul>
-      </div>
-      <div class="card media rv d1">
-        <div class="frame"><img src="${F("mayores")}" alt="Señora mayor usando una app sencilla en su cocina, con su pastillero y sus gafas sobre la mesa" loading="lazy"></div>
-        <div class="k mono"><span>B</span><span style="color:var(--nar)">Personas mayores</span></div>
-        <h3>Para mayores que quieren seguir a su manera</h3>
-        <ul><li>Recordatorios de citas y medicamentos</li><li>Botones grandes y voz: nada que aprender</li><li>Su gente a un toque, lecturas en voz alta</li><li>La familia tranquila, aunque esté lejos</li></ul>
-      </div>
-    </div>
-    <div class="grid4" style="border-top:0">
-      <div class="card rv"><div class="k mono"><span>01</span></div><h3>Accesibles</h3><p>Pictogramas, voz y botones grandes. Pensadas para quien no lee o no se lleva bien con la tecnología.</p></div>
-      <div class="card rv d1"><div class="k mono"><span>02</span></div><h3>Con evidencia</h3><p>Apoyos visuales, anticipación y refuerzo: prácticas que la investigación clínica ya validó.</p></div>
-      <div class="card rv d2"><div class="k mono"><span>03</span></div><h3>Familia conectada</h3><p>Avisos, seguimiento y resúmenes para quienes cuidan, cada uno desde su celular.</p></div>
-      <div class="card rv d3"><div class="k mono"><span>04</span></div><h3>Datos cuidados</h3><p>Información de salud y de familias tratada con respeto y conforme a la Ley 1581 de 2012.</p></div>
-    </div>
-    <div class="ch-foot rv">
-      <a class="btn" href="#contacto">¿Tienes una idea así? Conversemos →</a>
-      <span class="note" style="margin:0">Para fundaciones, colegios, IPS, programas de pacientes y empresas.</span>
+    <div class="grid3">
+      <div class="card rv"><div class="k mono"><span>01</span><span>Móvil</span></div><h3>Apps móviles</h3><p>Apps para Android y iPhone, sencillas de usar, con voz, notificaciones y modo sin conexión cuando hace falta.</p></div>
+      <div class="card rv d1"><div class="k mono"><span>02</span><span>Web</span></div><h3>Plataformas web</h3><p>Portales de clientes, paneles de administración y sistemas internos que reemplazan el Excel y el correo.</p></div>
+      <div class="card rv d2"><div class="k mono"><span>03</span><span>Datos</span></div><h3>Datos y tableros</h3><p>Tus fuentes en un solo modelo, con indicadores oficiales y tableros que todos entienden y en los que confían.</p></div>
+      <div class="card rv"><div class="k mono"><span>04</span><span>IA</span></div><h3>Inteligencia artificial</h3><p>Asistentes que responden con tu información, modelos que anticipan y procesos que se hacen solos, con criterio.</p></div>
+      <div class="card rv d1"><div class="k mono"><span>05</span><span>Integración</span></div><h3>Automatización</h3><p>Conectamos CRM, ERP, WhatsApp, correo y bases de datos para eliminar el trabajo manual repetitivo.</p></div>
+      <div class="card rv d2"><div class="k mono"><span>06</span><span>Validar</span></div><h3>MVP y prototipos</h3><p>Una primera versión real en semanas, para probar tu idea con usuarios antes de invertir en grande.</p></div>
     </div>
   </div>
 </section>
 
-<section class="ch" id="farma" data-ch="02" data-name="Salud y farma">
+<section class="ch" id="proceso" data-ch="02" data-name="Cómo trabajamos">
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">02</div>
+      <div><div class="ch-label mono rv">Cómo trabajamos</div></div>
+    </div>
+    <p class="mani rv">Primero el problema.<br><span class="o">Después la herramienta.</span></p>
+    <div class="steps4 rv" style="margin-top:70px">
+      <div><span class="disp">01</span><b>Descubrimiento</b><p>Entendemos el problema, a quién le sirve y cómo se mide el éxito.</p><span class="mono t">1 a 2 semanas</span></div>
+      <div><span class="disp">02</span><b>Prototipo</b><p>Pantallas navegables para validar con usuarios reales antes de programar.</p><span class="mono t">2 a 3 semanas</span></div>
+      <div><span class="disp">03</span><b>Desarrollo</b><p>Entregas cada semana, con avances visibles y precio cerrado por etapa.</p><span class="mono t">6 a 12 semanas</span></div>
+      <div><span class="disp">04</span><b>Acompañamiento</b><p>Puesta en marcha, soporte y mejoras para que la solución se use de verdad.</p><span class="mono t">Continuo</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="experiencia" data-ch="03" data-name="Experiencia">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num rv">03</div>
       <div>
-        <div class="ch-label mono rv">Salud y farma · El origen</div>
-        <h2 class="disp rv d1">30 años dentro de<br>la industria farmacéutica.</h2>
-        <p class="intro rv d2">De ahí viene el método: datos en los que todos confían, respeto por la información de salud y tecnología que se usa de verdad. Hoy sigo ayudando a laboratorios, distribuidores y programas de pacientes de Latinoamérica.</p>
+        <div class="ch-label mono rv">Por qué OA Tech</div>
+        <h2 class="disp rv d1">Treinta años<br>resolviendo problemas reales.</h2>
+        <p class="intro rv d2">No empezamos de cero. Llevamos tres décadas construyendo y operando tecnología en una multinacional: plataformas regionales, analítica, cadena de suministro y finanzas. Esa experiencia es la que ponemos en cada aplicación.</p>
+      </div>
+    </div>
+    <div class="stat-row" style="margin-top:0">
+      <div class="stat rv"><div class="big ac">30</div><p>años en tecnología y transformación digital.</p></div>
+      <div class="stat rv d1"><div class="big">LATAM</div><p>proyectos para varios países de la región, con usuarios en campo, oficina y gerencia.</p></div>
+      <div class="stat rv d2"><div class="big">360°</div><p>comercial, médica, finanzas, operaciones y cumplimiento: sabemos cómo funciona una empresa por dentro.</p></div>
+    </div>
+    <div class="grid3" style="margin-top:56px">
+      <div class="card rv"><div class="k mono"><span>01</span></div><h3>Con quien lo usa</h3><p>Diseñamos con las personas que van a usar el software, no solo con quien lo compra.</p></div>
+      <div class="card rv d1"><div class="k mono"><span>02</span></div><h3>Con datos claros</h3><p>Definiciones, indicadores y cifras que se pueden explicar y auditar.</p></div>
+      <div class="card rv d2"><div class="k mono"><span>03</span></div><h3>Con seguridad</h3><p>Información protegida y tratada conforme a la Ley 1581 de 2012, también cuando hay IA de por medio.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="farma" data-ch="04" data-name="Salud y farma">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num rv">04</div>
+      <div>
+        <div class="ch-label mono rv">Especialidad · Salud y farma</div>
+        <h2 class="disp rv d1">Donde más<br>experiencia tenemos.</h2>
+        <p class="intro rv d2">Conocemos la industria farmacéutica desde adentro. Para laboratorios, distribuidores y programas de pacientes tenemos un capítulo propio: datos comerciales, adherencia, Veeva y transparencia.</p>
       </div>
     </div>
     <a class="frame wide rv" href="/farma" style="display:block"><img src="${F("farma")}" alt="Línea de empaque farmacéutica con datos superpuestos" loading="lazy"><span class="corner mono">Capítulo Salud y farma ↗</span></a>
     <div class="grid4">
       <a class="card rv" href="/farma#una-sola-verdad"><div class="k mono"><span>A</span><span>Datos</span></div><h3>Una sola verdad</h3><p>CRM, SAP y bases externas en un solo modelo con KPIs oficiales, listo para tableros e IA.</p><span class="arrow">↗</span></a>
       <a class="card rv d1" href="/farma#rotacion-adherencia"><div class="k mono"><span>B</span><span>IA predictiva</span></div><h3>Rotación y adherencia</h3><p>Una cifra oficial y modelos que anticipan abandonos y cuánto fabricar.</p><span class="arrow">↗</span></a>
-      <a class="card rv d2" href="/farma#donvital"><div class="k mono"><span>C</span><span>App</span></div><h3>DonVital</h3><p>La app del paciente que mide la adherencia real: la que se toma, no la que se compra.</p><span class="arrow">↗</span></a>
+      <a class="card rv d2" href="/farma#servicios"><div class="k mono"><span>C</span><span>Equipos</span></div><h3>Reportes e IA</h3><p>Automatización de reportes y talleres de IA con criterio para equipos farma.</p><span class="arrow">↗</span></a>
       <a class="card rv d3" href="/farma#salud"><div class="k mono"><span>D</span><span>Operación</span></div><h3>Veeva y transparencia</h3><p>Administración de Veeva CRM y reporte de transferencias de valor (Res. 2881).</p><span class="arrow">↗</span></a>
     </div>
     <div class="ch-foot rv">
@@ -460,22 +514,7 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="principios" data-ch="03" data-name="Cómo trabajo">
-  <div class="wrap">
-    <div class="ch-head">
-      <div class="ch-num rv">03</div>
-      <div><div class="ch-label mono rv">Cómo trabajo</div></div>
-    </div>
-    <p class="mani rv">Primero la persona.<br><span class="o">Después la herramienta.</span></p>
-    <div class="grid3" style="margin-top:70px">
-      <div class="card rv"><div class="k mono"><span>01</span></div><h3>Con quien lo usa</h3><p>Cada producto nace de una familia, un paciente o un equipo real, y se prueba con ellos antes de crecer.</p></div>
-      <div class="card rv d1"><div class="k mono"><span>02</span></div><h3>Con evidencia</h3><p>Prácticas clínicas validadas, datos con definiciones claras y cifras que se pueden explicar.</p></div>
-      <div class="card rv d2"><div class="k mono"><span>03</span></div><h3>Con cuidado</h3><p>Información de salud y de familias tratada con respeto y conforme a la Ley 1581 de 2012.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="ch" id="sobre-mi" data-ch="04" data-name="Sobre mí">
+<section class="ch" id="sobre-mi" data-ch="05" data-name="Sobre mí">
   <div class="wrap">
     <div class="about">
       <div>
@@ -486,10 +525,10 @@ const HOME_BODY = `
       </div>
       <div>
         <p class="rv">Pasé 30 años liderando tecnología y transformación digital en una multinacional farmacéutica francesa: plataformas de visita médica, analítica de pacientes, cadena de suministro y presupuestos en Latinoamérica.</p>
-        <p class="rv d1">Hoy pongo esa experiencia al servicio de apps que resuelven problemas cotidianos de familias, cuidadores y pacientes, y sigo acompañando a empresas de salud que quieren decidir con datos.</p>
+        <p class="rv d1">Hoy dirijo OA Tech, una fábrica de software que pone esa experiencia al servicio de empresas y organizaciones que necesitan aplicaciones bien hechas: que se usen, que se puedan mantener y que resuelvan un problema real.</p>
         <ul class="creds rv d2">
           <li><span class="mono">01</span>30 años en tecnología y transformación digital</li>
-          <li><span class="mono">02</span>Creador de apps de acompañamiento y de adherencia para pacientes</li>
+          <li><span class="mono">02</span>Apps móviles, plataformas web y soluciones con IA</li>
           <li><span class="mono">03</span>Python, R e inteligencia artificial aplicada</li>
           <li><span class="mono">04</span>Administrador certificado de Veeva</li>
           <li><span class="mono">05</span>Cursos certificados en IA: Cloudera y O'Reilly</li>
@@ -500,30 +539,30 @@ const HOME_BODY = `
   </div>
 </section>
 ${contactBlock(
-  `<option>Una app para mi organización</option><option>Datos e IA para salud y farma</option><option>App del paciente (DonVital)</option><option>Veeva y CRM</option><option>Reporte de transparencia</option><option>Alianza o proyecto nuevo</option><option>Otro</option>`,
-  "Hablemos.",
-  "Si eres una fundación, un colegio, una IPS, un programa de pacientes o una empresa de salud, escríbeme. Te respondo personalmente.",
-  "05"
+  `<option>Una app móvil</option><option>Una plataforma web</option><option>Datos y tableros</option><option>Inteligencia artificial o automatización</option><option>Un MVP o prototipo</option><option>Datos e IA para salud y farma</option><option>Veeva y CRM</option><option>Reporte de transparencia</option><option>Otro</option>`,
+  "Cuéntanos<br>tu idea.",
+  "30 minutos para entender lo que necesitas y decirte con honestidad cómo lo haríamos, cuánto tomaría y si somos el equipo indicado. Te respondo personalmente.",
+  "06"
 )}
 <div class="bigword" aria-hidden="true">OA Tech</div>
 <footer>
   <div class="wrap">
-    <div>© 2026 OA Tech · Hecho en Colombia</div>
-    <div><a href="#proyectos">Qué hacemos</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">¿IA para tu empresa?</a></div>
+    <div>© 2026 OA Tech · Fábrica de software · Hecho en Colombia</div>
+    <div><a href="#servicios">Qué hacemos</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">¿IA para tu empresa?</a></div>
   </div>
 </footer>`;
 
 /* Redirige enlaces viejos (oatech.com.co/#casos, etc.) a la subpágina farma */
 const HOME_JS = `
 (function(){
-  var old=["una-sola-verdad","rotacion-adherencia","servicios","casos","salud","transparencia","diagnostico","donvital"];
+  var old=["una-sola-verdad","rotacion-adherencia","casos","salud","transparencia","diagnostico","donvital"];
   var h=(location.hash||"").slice(1);
   if(old.indexOf(h)>-1) location.replace("/farma#"+h);
 })();`;
 
 const HOME = shell({
-  title: "OA Tech · Tecnología que acompaña",
-  desc: "OA Tech diseña apps que acompañan a personas reales: niños que necesitan ver su día claro, mayores que quieren seguir a su manera y pacientes en tratamiento. Además, datos e IA para la industria de la salud.",
+  title: "OA Tech · Fábrica de software en Colombia",
+  desc: "OA Tech es una fábrica de software con 30 años de experiencia en tecnología, datos e industria: apps móviles, plataformas web, tableros de datos, inteligencia artificial y automatización a la medida.",
   nav: HOME_NAV,
   body: HOME_BODY,
   extraJs: HOME_JS,

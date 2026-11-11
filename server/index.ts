@@ -20,10 +20,8 @@ async function getDb(): Promise<SQL> {
 
 const BRAND = "https://oatech-brand-production.up.railway.app";
 const WA = "https://wa.me/447766285137?text=Hola%20Osvaldo%2C%20vi%20la%20p%C3%A1gina%20de%20OA%20Tech%20y%20quiero%20conversar.";
-const CLARITO = "https://clarito.oatech.com.co";
-const ACOMPANAPP = "https://acompanapp.com";
 const DEMO = "https://demo.oatech.com.co";
-const FOTOS = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@af02bf2464010c5938e0e0bcca666c517b38307b/fotos";
+const FOTOS = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@f5ca1a4d3bb49be7d655d3f9d4d76de8e8b0abf7/fotos";
 const F = (n: string) => `${FOTOS}/${n}.avif`;
 
 /* ───────────────────────── Estilos compartidos ───────────────────────── */
@@ -96,8 +94,6 @@ main{margin-left:var(--rail)}
 .ch-label::before{content:"";width:28px;height:1px;background:currentColor}
 .ch h2{font-size:clamp(44px,7vw,108px)}
 .ch .intro{max-width:640px;color:#bfc8d1;font-size:19px;margin-top:28px}
-.ch.sol .ch-label{color:var(--sol)}
-.ch.nar .ch-label{color:var(--nar)}
 /* proyecto */
 .proj{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start}
 .frame{position:relative;border:1px solid var(--line2);background:var(--bg3);overflow:hidden;aspect-ratio:16/9}
@@ -140,6 +136,9 @@ main{margin-left:var(--rail)}
 .card li{color:#c3ccd5;font-size:14.5px;padding:7px 0;border-top:1px dashed var(--line)}
 .card .for{margin-top:18px;color:var(--dim);font-size:13.5px}
 .card:has(.arrow){padding-bottom:64px}
+.card.media .frame{margin:-34px -30px 30px;border:0;border-bottom:1px solid var(--line)}
+.card.media .k{margin-bottom:18px}
+.card.media h3{font-size:40px}
 .card .arrow{position:absolute;right:26px;bottom:26px;color:var(--ac);transition:transform .25s}
 .card:hover .arrow{transform:translate(4px,-4px)}
 .ch-foot{display:flex;gap:12px;flex-wrap:wrap;margin-top:50px;align-items:center}
@@ -372,7 +371,7 @@ function contactBlock(opts: string, heading: string, intro: string, num: string)
 
 /* ───────────────────────── Página de inicio ───────────────────────── */
 const HOME_NAV = `
-<a href="#proyectos" data-sec="clarito">Proyectos</a>
+<a href="#proyectos" data-sec="apps">Qué hacemos</a>
 <a href="/farma">Salud y farma</a>
 <a href="#sobre-mi" data-sec="sobre-mi">Sobre mí</a>
 <a href="#contacto" class="cta">Conversemos</a>`;
@@ -395,87 +394,52 @@ const HOME_BODY = `
 </section>
 
 <div class="strip" aria-hidden="true"><div class="t">
-  <span>Clarito<i>✦</i></span><span>Acompañapp<i>✦</i></span><span>DonVital<i>✦</i></span><span>Datos e IA para salud<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
-  <span>Clarito<i>✦</i></span><span>Acompañapp<i>✦</i></span><span>DonVital<i>✦</i></span><span>Datos e IA para salud<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
+  <span>Apps que acompañan<i>✦</i></span><span>Niños y familias<i>✦</i></span><span>Personas mayores<i>✦</i></span><span>Datos e IA para salud<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
+  <span>Apps que acompañan<i>✦</i></span><span>Niños y familias<i>✦</i></span><span>Personas mayores<i>✦</i></span><span>Datos e IA para salud<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
 </div></div>
 
 <div id="proyectos"></div>
-<section class="ch sol" id="clarito" data-ch="01" data-name="Clarito">
+<section class="ch" id="apps" data-ch="01" data-name="Apps que acompañan">
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">01</div>
       <div>
-        <div class="ch-label mono rv">Clarito · Niños con autismo, TDAH o discapacidad intelectual</div>
-        <h2 class="disp rv d1">Su día,<br>paso a paso.</h2>
-        <p class="intro rv d2">Para muchos niños el día se siente como un montón de cosas que no saben cuándo vienen. Clarito se lo muestra con dibujos y voz, y a la familia le deja acompañarlo desde el celular, aunque no esté a su lado.</p>
+        <div class="ch-label mono rv">Lo que construimos</div>
+        <h2 class="disp rv d1">Apps que acompañan<br>el día a día.</h2>
+        <p class="intro rv d2">Diseñamos y desarrollamos apps para personas que necesitan un apoyo sencillo para vivir su día con más autonomía, y para las familias, terapeutas y organizaciones que las acompañan.</p>
       </div>
     </div>
-    <div class="proj">
-      <div class="rv">
-        <a class="frame" href="${CLARITO}" target="_blank" rel="noopener" style="display:block">
-          <div class="fallback" style="color:var(--sol)">Clarito.</div>
-          <img src="${F("clarito")}" alt="Niño revisando su rutina de la mañana en Clarito mientras su mamá lo mira desde la puerta" loading="lazy">
-          <span class="corner mono">clarito.oatech.com.co ↗</span>
-        </a>
-        <div class="meta-row mono"><span class="chip live">Piloto gratuito</span><span class="chip">Familias en Colombia</span><span class="chip">Colegios · Terapeutas</span></div>
+    <div class="grid2 duo">
+      <div class="card media rv">
+        <div class="frame"><img src="${F("ninos")}" alt="Niño siguiendo su rutina de la mañana en una tablet mientras su mamá lo mira desde la puerta" loading="lazy"></div>
+        <div class="k mono"><span>A</span><span style="color:var(--sol)">Niños y familias</span></div>
+        <h3>Para niños que necesitan ver su día claro</h3>
+        <ul><li>Rutinas paso a paso con dibujos grandes y voz</li><li>Anticipar cambios: primero esto, después aquello</li><li>Pedir ayuda aunque cueste hablar</li><li>La familia y el terapeuta acompañan desde el celular</li></ul>
       </div>
-      <div class="side rv d1">
-        <ul class="feat">
-          <li><span class="n mono">01</span><div><b>Rutinas paso a paso</b><span>Dibujo grande y voz en cada paso. No necesita saber leer.</span></div></li>
-          <li><span class="n mono">02</span><div><b>Primero / Después y reloj visual</b><span>Los cambios dejan de ser sorpresa; esperar deja de angustiar.</span></div></li>
-          <li><span class="n mono">03</span><div><b>Rincón de calma y tarjetas «Quiero…»</b><span>Pide ayuda aunque le cueste hablar, con aviso a la familia.</span></div></li>
-          <li><span class="n mono">04</span><div><b>La familia acompaña</b><span>Mamá, papá y abuelos ven su día; resumen semanal para el terapeuta.</span></div></li>
-        </ul>
-        <a class="btn sol" href="${CLARITO}" target="_blank" rel="noopener">Conocer Clarito →</a>
+      <div class="card media rv d1">
+        <div class="frame"><img src="${F("mayores")}" alt="Señora mayor usando una app sencilla en su cocina, con su pastillero y sus gafas sobre la mesa" loading="lazy"></div>
+        <div class="k mono"><span>B</span><span style="color:var(--nar)">Personas mayores</span></div>
+        <h3>Para mayores que quieren seguir a su manera</h3>
+        <ul><li>Recordatorios de citas y medicamentos</li><li>Botones grandes y voz: nada que aprender</li><li>Su gente a un toque, lecturas en voz alta</li><li>La familia tranquila, aunque esté lejos</li></ul>
       </div>
     </div>
-    <div class="stat-row">
-      <div class="stat rv"><div class="big" style="color:var(--sol)">10<span style="font-size:.5em;color:var(--muted)"> de 28</span></div><p>prácticas basadas en evidencia para autismo (NCAEP, 2020) reunidas en una sola app.</p></div>
-      <div class="stat rv d1"><div class="big">14</div><p>actividades cortas con principio y fin para jugar y saber cuándo parar.</p></div>
-      <div class="stat rv d2"><div class="big">1</div><p>panel para colegios: agenda del salón, cambios anticipados y PIAR con evidencia.</p></div>
+    <div class="grid4" style="border-top:0">
+      <div class="card rv"><div class="k mono"><span>01</span></div><h3>Accesibles</h3><p>Pictogramas, voz y botones grandes. Pensadas para quien no lee o no se lleva bien con la tecnología.</p></div>
+      <div class="card rv d1"><div class="k mono"><span>02</span></div><h3>Con evidencia</h3><p>Apoyos visuales, anticipación y refuerzo: prácticas que la investigación clínica ya validó.</p></div>
+      <div class="card rv d2"><div class="k mono"><span>03</span></div><h3>Familia conectada</h3><p>Avisos, seguimiento y resúmenes para quienes cuidan, cada uno desde su celular.</p></div>
+      <div class="card rv d3"><div class="k mono"><span>04</span></div><h3>Datos cuidados</h3><p>Información de salud y de familias tratada con respeto y conforme a la Ley 1581 de 2012.</p></div>
     </div>
-    <p class="note">Clarito es un apoyo para el día a día: no reemplaza la terapia ni el acompañamiento profesional.</p>
+    <div class="ch-foot rv">
+      <a class="btn" href="#contacto">¿Tienes una idea así? Conversemos →</a>
+      <span class="note" style="margin:0">Para fundaciones, colegios, IPS, programas de pacientes y empresas.</span>
+    </div>
   </div>
 </section>
 
-<section class="ch nar" id="acompanapp" data-ch="02" data-name="Acompañapp">
+<section class="ch" id="farma" data-ch="02" data-name="Salud y farma">
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">02</div>
-      <div>
-        <div class="ch-label mono rv">Acompañapp · Personas mayores</div>
-        <h2 class="disp rv d1">Que sigan haciendo<br>las cosas a su manera.</h2>
-        <p class="intro rv d2">A veces tu mamá solo necesita una pequeña ayuda para organizar su día y recordar algunas cosas. Acompañapp vive en su propio celular, con botones grandes y voz: nada que aprender.</p>
-      </div>
-    </div>
-    <div class="proj">
-      <div class="side rv">
-        <p class="say">«No se trata de estar pendientes de todo. Se trata de que ellos puedan hacer más cosas por sí mismos.»</p>
-        <ul class="feat">
-          <li><span class="n mono">01</span><div><b>Le recuerda su día</b><span>Citas, medicamentos y lo importante de su rutina.</span></div></li>
-          <li><span class="n mono">02</span><div><b>Sus personas, a un toque</b><span>Llama a su familia sin buscar números.</span></div></li>
-          <li><span class="n mono">03</span><div><b>Le lee en voz alta</b><span>Lecturas, noticias tranquilas y temas que disfruta.</span></div></li>
-          <li><span class="n mono">04</span><div><b>¿Dónde dejé mis gafas?</b><span>Le ayuda a recordar dónde quedaron sus cosas.</span></div></li>
-        </ul>
-        <a class="btn nar" href="${ACOMPANAPP}" target="_blank" rel="noopener">Conocer Acompañapp →</a>
-      </div>
-      <div class="rv d1">
-        <a class="frame" href="${ACOMPANAPP}" target="_blank" rel="noopener" style="display:block">
-          <div class="fallback" style="color:var(--nar)">Acompañapp</div>
-          <img src="${F("acompanapp")}" alt="Señora mayor usando Acompañapp en su cocina, con su pastillero y sus gafas sobre la mesa" loading="lazy">
-          <span class="corner mono">acompanapp.com ↗</span>
-        </a>
-        <div class="meta-row mono"><span class="chip soon">Muy pronto</span><span class="chip">Lista de espera abierta</span></div>
-        <p class="note">Acompañapp es una ayuda para el día a día. No es un sistema de emergencias ni reemplaza el cuidado profesional.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="ch" id="farma" data-ch="03" data-name="Salud y farma">
-  <div class="wrap">
-    <div class="ch-head">
-      <div class="ch-num rv">03</div>
       <div>
         <div class="ch-label mono rv">Salud y farma · El origen</div>
         <h2 class="disp rv d1">30 años dentro de<br>la industria farmacéutica.</h2>
@@ -496,10 +460,10 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="principios" data-ch="04" data-name="Cómo trabajo">
+<section class="ch" id="principios" data-ch="03" data-name="Cómo trabajo">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-num rv">04</div>
+      <div class="ch-num rv">03</div>
       <div><div class="ch-label mono rv">Cómo trabajo</div></div>
     </div>
     <p class="mani rv">Primero la persona.<br><span class="o">Después la herramienta.</span></p>
@@ -511,7 +475,7 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="sobre-mi" data-ch="05" data-name="Sobre mí">
+<section class="ch" id="sobre-mi" data-ch="04" data-name="Sobre mí">
   <div class="wrap">
     <div class="about">
       <div>
@@ -525,7 +489,7 @@ const HOME_BODY = `
         <p class="rv d1">Hoy pongo esa experiencia al servicio de productos propios que resuelven problemas cotidianos de familias, cuidadores y pacientes, y sigo acompañando a empresas de salud que quieren decidir con datos.</p>
         <ul class="creds rv d2">
           <li><span class="mono">01</span>30 años en tecnología y transformación digital</li>
-          <li><span class="mono">02</span>Creador de Clarito, Acompañapp y DonVital</li>
+          <li><span class="mono">02</span>Creador de apps de acompañamiento y de adherencia para pacientes</li>
           <li><span class="mono">03</span>Python, R e inteligencia artificial aplicada</li>
           <li><span class="mono">04</span>Administrador certificado de Veeva</li>
           <li><span class="mono">05</span>Cursos certificados en IA: Cloudera y O'Reilly</li>
@@ -536,16 +500,16 @@ const HOME_BODY = `
   </div>
 </section>
 ${contactBlock(
-  `<option>Clarito (niños con TEA / TDAH)</option><option>Acompañapp (personas mayores)</option><option>Datos e IA para salud y farma</option><option>App del paciente (DonVital)</option><option>Veeva y CRM</option><option>Reporte de transparencia</option><option>Alianza o proyecto nuevo</option><option>Otro</option>`,
+  `<option>Una app para mi organización</option><option>Datos e IA para salud y farma</option><option>App del paciente (DonVital)</option><option>Veeva y CRM</option><option>Reporte de transparencia</option><option>Alianza o proyecto nuevo</option><option>Otro</option>`,
   "Hablemos.",
-  "Si eres una familia, un terapeuta, un colegio, una fundación o una empresa de salud, escríbeme. Te respondo personalmente.",
-  "06"
+  "Si eres una fundación, un colegio, una IPS, un programa de pacientes o una empresa de salud, escríbeme. Te respondo personalmente.",
+  "05"
 )}
 <div class="bigword" aria-hidden="true">OA Tech</div>
 <footer>
   <div class="wrap">
     <div>© 2026 OA Tech · Hecho en Colombia</div>
-    <div><a href="${CLARITO}">Clarito</a> · <a href="${ACOMPANAPP}">Acompañapp</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">¿IA para tu empresa?</a></div>
+    <div><a href="#proyectos">Qué hacemos</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">¿IA para tu empresa?</a></div>
   </div>
 </footer>`;
 
@@ -559,7 +523,7 @@ const HOME_JS = `
 
 const HOME = shell({
   title: "OA Tech · Tecnología que acompaña",
-  desc: "OA Tech diseña apps que acompañan a personas reales: Clarito para niños con autismo y TDAH, Acompañapp para personas mayores, y datos e IA para la industria de la salud.",
+  desc: "OA Tech diseña apps que acompañan a personas reales: niños que necesitan ver su día claro, mayores que quieren seguir a su manera y pacientes en tratamiento. Además, datos e IA para la industria de la salud.",
   nav: HOME_NAV,
   body: HOME_BODY,
   extraJs: HOME_JS,

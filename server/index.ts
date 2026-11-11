@@ -386,7 +386,7 @@ const HOME_BODY = `
     <div class="row">
       <p class="lead rv d2">Diseño y construyo apps que ayudan a personas reales en su día a día: niños que necesitan ver su día claro, mayores que quieren seguir haciendo las cosas a su manera y pacientes que necesitan seguir su tratamiento.</p>
       <div class="ctas rv d3">
-        <a class="btn" href="#proyectos">Ver proyectos ↓</a>
+        <a class="btn" href="#proyectos">Ver qué hacemos ↓</a>
         <a class="btn ghost" href="#contacto">Conversemos</a>
       </div>
     </div>
@@ -486,7 +486,7 @@ const HOME_BODY = `
       </div>
       <div>
         <p class="rv">Pasé 30 años liderando tecnología y transformación digital en una multinacional farmacéutica francesa: plataformas de visita médica, analítica de pacientes, cadena de suministro y presupuestos en Latinoamérica.</p>
-        <p class="rv d1">Hoy pongo esa experiencia al servicio de productos propios que resuelven problemas cotidianos de familias, cuidadores y pacientes, y sigo acompañando a empresas de salud que quieren decidir con datos.</p>
+        <p class="rv d1">Hoy pongo esa experiencia al servicio de apps que resuelven problemas cotidianos de familias, cuidadores y pacientes, y sigo acompañando a empresas de salud que quieren decidir con datos.</p>
         <ul class="creds rv d2">
           <li><span class="mono">01</span>30 años en tecnología y transformación digital</li>
           <li><span class="mono">02</span>Creador de apps de acompañamiento y de adherencia para pacientes</li>

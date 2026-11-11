@@ -23,6 +23,8 @@ const WA = "https://wa.me/447766285137?text=Hola%20Osvaldo%2C%20vi%20la%20p%C3%A
 const DEMO = "https://demo.oatech.com.co";
 const FOTOS = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@f5ca1a4d3bb49be7d655d3f9d4d76de8e8b0abf7/fotos";
 const F = (n: string) => `${FOTOS}/${n}.avif`;
+/* Fotos de Unsplash (licencia Unsplash: uso libre, comercial, sin atribución obligatoria) */
+const U = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
 
 /* ───────────────────────── Estilos compartidos ───────────────────────── */
 const CSS = `
@@ -66,6 +68,9 @@ main{margin-left:var(--rail)}
 .btn.nar:hover{box-shadow:0 10px 30px -10px var(--nar)}
 /* héroe */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero .hphoto{position:absolute;inset:0}
+.hero .hphoto img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(.5) brightness(.45) contrast(1.1)}
+.hero .hphoto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,12,.92) 0%,rgba(7,9,12,.6) 50%,rgba(7,9,12,.35) 100%),linear-gradient(180deg,rgba(7,9,12,.4),transparent 30%,transparent 60%,var(--bg))}
 .hero .gridbg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse at 70% 40%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse at 70% 40%,#000 10%,transparent 75%);animation:gridmove 30s linear infinite}
 @keyframes gridmove{to{background-position:80px 80px,80px 80px}}
 .hero .term{position:absolute;right:5%;top:15%;width:min(400px,30vw);border:1px solid var(--line2);background:rgba(12,16,21,.75);backdrop-filter:blur(8px);box-shadow:0 30px 80px -30px rgba(60,198,234,.35)}
@@ -111,6 +116,9 @@ main{margin-left:var(--rail)}
 .frame{position:relative;border:1px solid var(--line2);background:var(--bg3);overflow:hidden;aspect-ratio:16/9}
 .frame.wide{aspect-ratio:21/8;margin-bottom:56px}
 .frame.wide img{object-position:center 60%}
+.frame.duo img{filter:grayscale(.55) brightness(.75) contrast(1.08)}
+.frame.duo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(7,9,12,.55)),rgba(60,198,234,.10);mix-blend-mode:normal;pointer-events:none}
+.card .ico{width:34px;height:34px;color:var(--ac);margin-bottom:22px;display:block}
 .portrait{margin-top:36px;border:1px solid var(--line2);overflow:hidden;max-width:380px;aspect-ratio:4/5;background:var(--bg3)}
 .portrait img{width:100%;height:100%;object-fit:cover;filter:contrast(1.03)}
 .frame img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
@@ -402,6 +410,7 @@ const HOME_NAV = `
 
 const HOME_BODY = `
 <section class="hero" id="inicio" data-ch="00" data-name="OA Tech">
+  <div class="hphoto" aria-hidden="true"><img src="${U("photo-1559842135-8d5e4214ae77", 1800)}" alt="" fetchpriority="high"></div>
   <div class="gridbg" aria-hidden="true"></div>
   <div class="glow" aria-hidden="true"></div>
   <div class="term rv d2" aria-hidden="true">
@@ -440,13 +449,14 @@ const HOME_BODY = `
         <p class="intro rv d2">Diseñamos, construimos y mantenemos software para empresas, fundaciones, instituciones de salud y emprendedores. Una sola mano desde la idea hasta que la gente lo usa todos los días.</p>
       </div>
     </div>
+    <div class="frame wide duo rv"><img src="${U("photo-1760670399462-f5e479452c27")}" alt="Código de programación en la pantalla de un portátil" loading="lazy"><span class="corner mono">Desarrollo a la medida</span></div>
     <div class="grid3">
-      <div class="card rv"><div class="k mono"><span>01</span><span>Móvil</span></div><h3>Apps móviles</h3><p>Apps para Android y iPhone, sencillas de usar, con voz, notificaciones y modo sin conexión cuando hace falta.</p></div>
-      <div class="card rv d1"><div class="k mono"><span>02</span><span>Web</span></div><h3>Plataformas web</h3><p>Portales de clientes, paneles de administración y sistemas internos que reemplazan el Excel y el correo.</p></div>
-      <div class="card rv d2"><div class="k mono"><span>03</span><span>Datos</span></div><h3>Datos y tableros</h3><p>Tus fuentes en un solo modelo, con indicadores oficiales y tableros que todos entienden y en los que confían.</p></div>
-      <div class="card rv"><div class="k mono"><span>04</span><span>IA</span></div><h3>Inteligencia artificial</h3><p>Asistentes que responden con tu información, modelos que anticipan y procesos que se hacen solos, con criterio.</p></div>
-      <div class="card rv d1"><div class="k mono"><span>05</span><span>Integración</span></div><h3>Automatización</h3><p>Conectamos CRM, ERP, WhatsApp, correo y bases de datos para eliminar el trabajo manual repetitivo.</p></div>
-      <div class="card rv d2"><div class="k mono"><span>06</span><span>Validar</span></div><h3>MVP y prototipos</h3><p>Una primera versión real en semanas, para probar tu idea con usuarios antes de invertir en grande.</p></div>
+      <div class="card rv"><div class="k mono"><span>01</span><span>Móvil</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><h3>Apps móviles</h3><p>Apps para Android y iPhone, sencillas de usar, con voz, notificaciones y modo sin conexión cuando hace falta.</p></div>
+      <div class="card rv d1"><div class="k mono"><span>02</span><span>Web</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2.5" y="4" width="19" height="15" rx="2"/><path d="M2.5 8.5h19M6 6.3h.01M8.5 6.3h.01"/></svg><h3>Plataformas web</h3><p>Portales de clientes, paneles de administración y sistemas internos que reemplazan el Excel y el correo.</p></div>
+      <div class="card rv d2"><div class="k mono"><span>03</span><span>Datos</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 20.5h17M6.5 17v-5M11 17V7M15.5 17v-8M20 17V4"/></svg><h3>Datos y tableros</h3><p>Tus fuentes en un solo modelo, con indicadores oficiales y tableros que todos entienden y en los que confían.</p></div>
+      <div class="card rv"><div class="k mono"><span>04</span><span>IA</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 9.5h5v5h-5zM9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><h3>Inteligencia artificial</h3><p>Asistentes que responden con tu información, modelos que anticipan y procesos que se hacen solos, con criterio.</p></div>
+      <div class="card rv d1"><div class="k mono"><span>05</span><span>Integración</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h11l-3-3M20 17H9l3 3"/><circle cx="18.5" cy="7" r="1.5"/><circle cx="5.5" cy="17" r="1.5"/></svg><h3>Automatización</h3><p>Conectamos CRM, ERP, WhatsApp, correo y bases de datos para eliminar el trabajo manual repetitivo.</p></div>
+      <div class="card rv d2"><div class="k mono"><span>06</span><span>Validar</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19c0-3 1-5 4-6l2 2c-1 3-3 4-6 4zM9 13l6-6c2-2 4.5-2.5 6-2.5 0 1.5-.5 4-2.5 6l-6 6M15.5 8.5h.01"/></svg><h3>MVP y prototipos</h3><p>Una primera versión real en semanas, para probar tu idea con usuarios antes de invertir en grande.</p></div>
     </div>
   </div>
 </section>
@@ -458,7 +468,8 @@ const HOME_BODY = `
       <div><div class="ch-label mono rv">Cómo trabajamos</div></div>
     </div>
     <p class="mani rv">Primero el problema.<br><span class="o">Después la herramienta.</span></p>
-    <div class="steps4 rv" style="margin-top:70px">
+    <div class="frame wide duo rv" style="margin-top:60px;margin-bottom:0"><img src="${U("photo-1677506048377-1099738d294d")}" alt="Equipo organizando tareas con notas adhesivas en un tablero" loading="lazy"><span class="corner mono">Descubrimiento y prototipo</span></div>
+    <div class="steps4 rv" style="margin-top:40px">
       <div><span class="disp">01</span><b>Descubrimiento</b><p>Entendemos el problema, a quién le sirve y cómo se mide el éxito.</p><span class="mono t">1 a 2 semanas</span></div>
       <div><span class="disp">02</span><b>Prototipo</b><p>Pantallas navegables para validar con usuarios reales antes de programar.</p><span class="mono t">2 a 3 semanas</span></div>
       <div><span class="disp">03</span><b>Desarrollo</b><p>Entregas cada semana, con avances visibles y precio cerrado por etapa.</p><span class="mono t">6 a 12 semanas</span></div>
@@ -477,6 +488,7 @@ const HOME_BODY = `
         <p class="intro rv d2">No empezamos de cero. Llevamos tres décadas construyendo y operando tecnología en una multinacional: plataformas regionales, analítica, cadena de suministro y finanzas. Esa experiencia es la que ponemos en cada aplicación.</p>
       </div>
     </div>
+    <div class="frame wide duo rv"><img src="${U("photo-1526628953301-3e589a6a8b74")}" alt="Tablero de indicadores en la pantalla de un portátil" loading="lazy"><span class="corner mono">Datos que se usan para decidir</span></div>
     <div class="stat-row" style="margin-top:0">
       <div class="stat rv"><div class="big ac">30</div><p>años en tecnología y transformación digital.</p></div>
       <div class="stat rv d1"><div class="big">LATAM</div><p>proyectos para varios países de la región, con usuarios en campo, oficina y gerencia.</p></div>
@@ -547,7 +559,7 @@ ${contactBlock(
 <div class="bigword" aria-hidden="true">OA Tech</div>
 <footer>
   <div class="wrap">
-    <div>© 2026 OA Tech · Fábrica de software · Hecho en Colombia</div>
+    <div>© 2026 OA Tech · Fábrica de software · Hecho en Colombia · Algunas fotos: Unsplash</div>
     <div><a href="#servicios">Qué hacemos</a> · <a href="/farma">Salud y farma</a> · <a href="https://decide.oatech.com.co">¿IA para tu empresa?</a></div>
   </div>
 </footer>`;

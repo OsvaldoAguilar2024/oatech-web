@@ -162,6 +162,13 @@ main{margin-left:var(--rail)}
 .card .arrow{position:absolute;right:26px;bottom:26px;color:var(--ac);transition:transform .25s}
 .card:hover .arrow{transform:translate(4px,-4px)}
 .ch-foot{display:flex;gap:12px;flex-wrap:wrap;margin-top:50px;align-items:center}
+/* fondos de capítulo */
+.ch.hasbg{overflow:hidden}
+.ch.hasbg>.wrap{position:relative;z-index:1}
+.chbg{position:absolute;left:0;right:0;top:0;height:820px;z-index:0;pointer-events:none}
+.chbg img{width:100%;height:100%;object-fit:cover;object-position:center 35%;filter:grayscale(.35) brightness(.55) contrast(1.05)}
+.chbg.top img{object-position:center 15%}
+.chbg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,12,.88) 0%,rgba(7,9,12,.55) 55%,rgba(7,9,12,.35) 100%),linear-gradient(180deg,var(--bg) 0%,rgba(7,9,12,.2) 18%,rgba(7,9,12,.35) 60%,var(--bg) 100%)}
 /* IA sin humo */
 .verd{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .verd>div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 26px 30px;position:relative}
@@ -289,10 +296,12 @@ footer a{color:var(--muted)}
   .stat+.stat{padding-left:0;border-left:0;border-top:1px solid var(--line)}
   .stat{padding:20px 0}
   .cf .two{grid-template-columns:1fr}
-  .status{padding:12px 20px;gap:14px}
-  .status .cur{min-width:0;font-size:10.5px}
-  .status .scroll{display:none}
-  .wa{bottom:64px;right:16px;width:50px;height:50px}
+  .status{display:none}
+  .wa{bottom:20px;right:16px;width:50px;height:50px}
+  .chbg{height:640px}
+  .chbg::after{background:linear-gradient(180deg,var(--bg) 0%,rgba(7,9,12,.45) 15%,rgba(7,9,12,.6) 60%,var(--bg) 100%)}
+  .frame.wide{aspect-ratio:4/3}
+  footer{padding-bottom:60px}
 }
 `;
 
@@ -510,7 +519,8 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="servicios" data-ch="02" data-name="Qué hacemos">
+<section class="ch hasbg" id="servicios" data-ch="02" data-name="Qué hacemos">
+  <div class="chbg" aria-hidden="true"><img src="${U("photo-1760670399462-f5e479452c27")}" alt="" loading="lazy"></div>
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">02</div>
@@ -520,7 +530,6 @@ const HOME_BODY = `
         <p class="intro rv d2">Diseñamos, construimos y mantenemos software para empresas, fundaciones, instituciones de salud y emprendedores. Una sola mano desde la idea hasta que la gente lo usa todos los días.</p>
       </div>
     </div>
-    <div class="frame wide duo rv"><img src="${U("photo-1760670399462-f5e479452c27")}" alt="Código de programación en la pantalla de un portátil" loading="lazy"><span class="corner mono">Desarrollo a la medida</span></div>
     <div class="grid3">
       <div class="card rv"><div class="k mono"><span>01</span><span>Móvil</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><h3>Apps móviles</h3><p>Apps para Android y iPhone, sencillas de usar, con voz, notificaciones y modo sin conexión cuando hace falta.</p></div>
       <div class="card rv d1"><div class="k mono"><span>02</span><span>Web</span></div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2.5" y="4" width="19" height="15" rx="2"/><path d="M2.5 8.5h19M6 6.3h.01M8.5 6.3h.01"/></svg><h3>Plataformas web</h3><p>Portales de clientes, paneles de administración y sistemas internos que reemplazan el Excel y el correo.</p></div>
@@ -532,15 +541,15 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="proceso" data-ch="03" data-name="Cómo trabajamos">
+<section class="ch hasbg" id="proceso" data-ch="03" data-name="Cómo trabajamos">
+  <div class="chbg top" aria-hidden="true"><img src="${U("photo-1677506048377-1099738d294d")}" alt="" loading="lazy"></div>
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">03</div>
       <div><div class="ch-label mono rv">Cómo trabajamos</div></div>
     </div>
     <p class="mani rv">Primero el problema.<br><span class="o">Después la herramienta.</span></p>
-    <div class="frame wide duo rv" style="margin-top:60px;margin-bottom:0"><img src="${U("photo-1677506048377-1099738d294d")}" alt="Equipo organizando tareas con notas adhesivas en un tablero" loading="lazy"><span class="corner mono">Descubrimiento y prototipo</span></div>
-    <div class="steps4 rv" style="margin-top:40px">
+    <div class="steps4 rv" style="margin-top:70px">
       <div><span class="disp">01</span><b>Descubrimiento</b><p>Entendemos el problema, a quién le sirve y cómo se mide el éxito.</p><span class="mono t">1 a 2 semanas</span></div>
       <div><span class="disp">02</span><b>Prototipo</b><p>Pantallas navegables para validar con usuarios reales antes de programar.</p><span class="mono t">2 a 3 semanas</span></div>
       <div><span class="disp">03</span><b>Desarrollo</b><p>Entregas cada semana, con avances visibles y precio cerrado por etapa.</p><span class="mono t">6 a 12 semanas</span></div>
@@ -549,7 +558,8 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="experiencia" data-ch="04" data-name="Experiencia">
+<section class="ch hasbg" id="experiencia" data-ch="04" data-name="Experiencia">
+  <div class="chbg" aria-hidden="true"><img src="${U("photo-1526628953301-3e589a6a8b74")}" alt="" loading="lazy"></div>
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">04</div>
@@ -559,7 +569,6 @@ const HOME_BODY = `
         <p class="intro rv d2">No empezamos de cero. Llevamos tres décadas construyendo y operando tecnología en una multinacional: plataformas regionales, analítica, cadena de suministro y finanzas. Esa experiencia es la que ponemos en cada aplicación.</p>
       </div>
     </div>
-    <div class="frame wide duo rv"><img src="${U("photo-1526628953301-3e589a6a8b74")}" alt="Tablero de indicadores en la pantalla de un portátil" loading="lazy"><span class="corner mono">Datos que se usan para decidir</span></div>
     <div class="stat-row" style="margin-top:0">
       <div class="stat rv"><div class="big ac">30</div><p>años en tecnología y transformación digital.</p></div>
       <div class="stat rv d1"><div class="big">LATAM</div><p>proyectos para varios países de la región, con usuarios en campo, oficina y gerencia.</p></div>
@@ -573,7 +582,8 @@ const HOME_BODY = `
   </div>
 </section>
 
-<section class="ch" id="farma" data-ch="05" data-name="Salud y farma">
+<section class="ch hasbg" id="farma" data-ch="05" data-name="Salud y farma">
+  <div class="chbg" aria-hidden="true"><img src="${F("farma")}" alt="" loading="lazy"></div>
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">05</div>
@@ -583,7 +593,6 @@ const HOME_BODY = `
         <p class="intro rv d2">Conocemos la industria farmacéutica desde adentro. Para laboratorios, distribuidores y programas de pacientes tenemos un capítulo propio: datos comerciales, adherencia, Veeva y transparencia.</p>
       </div>
     </div>
-    <a class="frame wide rv" href="/farma" style="display:block"><img src="${F("farma")}" alt="Línea de empaque farmacéutica con datos superpuestos" loading="lazy"><span class="corner mono">Capítulo Salud y farma ↗</span></a>
     <div class="grid4">
       <a class="card rv" href="/farma#una-sola-verdad"><div class="k mono"><span>A</span><span>Datos</span></div><h3>Una sola verdad</h3><p>CRM, SAP y bases externas en un solo modelo con KPIs oficiales, listo para tableros e IA.</p><span class="arrow">↗</span></a>
       <a class="card rv d1" href="/farma#rotacion-adherencia"><div class="k mono"><span>B</span><span>IA predictiva</span></div><h3>Rotación y adherencia</h3><p>Una cifra oficial y modelos que anticipan abandonos y cuánto fabricar.</p><span class="arrow">↗</span></a>

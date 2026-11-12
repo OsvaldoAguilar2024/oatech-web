@@ -474,7 +474,8 @@ const HOME_BODY = `
   <span>IA sin humo<i>✦</i></span><span>Apps móviles<i>✦</i></span><span>Plataformas web<i>✦</i></span><span>Datos y tableros<i>✦</i></span><span>Inteligencia artificial<i>✦</i></span><span>Automatización<i>✦</i></span><span>Hecho en Colombia<i>✦</i></span>
 </div></div>
 
-<section class="ch" id="ia" data-ch="01" data-name="IA sin humo">
+<section class="ch hasbg" id="ia" data-ch="01" data-name="IA sin humo">
+  <div class="chbg" aria-hidden="true"><img src="${U("photo-1763568258367-1c52beb60be7")}" alt="" loading="lazy"></div>
   <div class="wrap">
     <div class="ch-head">
       <div class="ch-num rv">01</div>

@@ -23,6 +23,7 @@ const WA = "https://wa.me/447766285137?text=Hola%20Osvaldo%2C%20vi%20la%20p%C3%A
 const DEMO = "https://demo.oatech.com.co";
 const FOTOS = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@f5ca1a4d3bb49be7d655d3f9d4d76de8e8b0abf7/fotos";
 const F = (n: string) => `${FOTOS}/${n}.avif`;
+const MARCA = "https://cdn.jsdelivr.net/gh/OsvaldoAguilar2024/oatech-web@ca849eb5d52099715d7675b0656bffdf3608275e/fotos/marca.png";
 /* Fotos de Unsplash (licencia Unsplash: uso libre, comercial, sin atribución obligatoria) */
 const U = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
 
@@ -247,10 +248,10 @@ footer a{color:var(--muted)}
 .wa svg{width:26px;height:26px}
 /* cursor */
 .cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:200;border-radius:50%;opacity:0;transition:opacity .3s}
-.cur-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--ac);box-shadow:0 0 12px var(--ac)}
-.cur-ring{width:36px;height:36px;margin:-18px 0 0 -18px;border:1px solid rgba(60,198,234,.55);transition:opacity .3s,width .25s,height .25s,margin .25s,background .25s,border-color .25s}
-.cur-ring.hot{width:64px;height:64px;margin:-32px 0 0 -32px;background:rgba(60,198,234,.1);border-color:var(--ac)}
-.has-cursor .cur-dot,.has-cursor .cur-ring{opacity:1}
+.cur-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--ac);box-shadow:0 0 12px var(--ac)}
+.cur-ring{width:46px;height:46px;margin:-23px 0 0 -23px;border:1px solid rgba(60,198,234,.55);background:rgba(7,9,12,.35) url(${MARCA}) center/26px auto no-repeat;transition:opacity .3s,width .25s,height .25s,margin .25s,background .25s,border-color .25s}
+.cur-ring.hot{width:64px;height:64px;margin:-32px 0 0 -32px;background-color:rgba(60,198,234,.12);background-size:32px auto;border-color:var(--ac)}
+.has-cursor .cur-ring{opacity:1}
 @media (pointer:fine){.has-cursor,.has-cursor a,.has-cursor button{cursor:none}.has-cursor input,.has-cursor textarea,.has-cursor select{cursor:auto}}
 /* revelado */
 .rv{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
@@ -339,7 +340,7 @@ const SHARED_JS = `
     document.addEventListener("mousemove", function(e){ mx=e.clientX; my=e.clientY; document.body.classList.add("has-cursor"); d.style.transform="translate("+mx+"px,"+my+"px)"; });
     document.addEventListener("mouseleave", function(){ document.body.classList.remove("has-cursor"); });
     document.addEventListener("mouseover", function(e){ r.classList.toggle("hot", !!e.target.closest("a,button,select,.card")); });
-    (function loop(){ rx+=(mx-rx)*.18; ry+=(my-ry)*.18; r.style.transform="translate("+rx+"px,"+ry+"px)"; requestAnimationFrame(loop); })();
+    (function loop(){ rx+=(mx-rx)*.3; ry+=(my-ry)*.3; r.style.transform="translate("+rx+"px,"+ry+"px)"; requestAnimationFrame(loop); })();
   }
   var f=document.getElementById("contacto-form");
   if(f) f.addEventListener("submit", async function(e){

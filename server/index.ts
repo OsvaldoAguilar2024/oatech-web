@@ -227,6 +227,8 @@ form.cf{display:grid;gap:16px}
 .cf .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cf .btn{justify-self:start;margin-top:10px}
 .ok{display:none;border:1px solid var(--ac);padding:26px;color:var(--ink)}
+.err{display:none;border:1px solid var(--nar);padding:20px;margin-top:16px;color:var(--ink)}
+.err a{color:var(--nar)}
 /* pie */
 footer{padding:60px 0 120px;color:var(--dim);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -342,13 +344,17 @@ const SHARED_JS = `
     document.addEventListener("mouseover", function(e){ r.classList.toggle("hot", !!e.target.closest("a,button,select,.card")); });
     (function loop(){ rx+=(mx-rx)*.3; ry+=(my-ry)*.3; r.style.transform="translate("+rx+"px,"+ry+"px)"; requestAnimationFrame(loop); })();
   }
-  var f=document.getElementById("contacto-form");
-  if(f) f.addEventListener("submit", async function(e){
-    e.preventDefault();
-    var data=Object.fromEntries(new FormData(this));
-    try{ await fetch("/api/contacto",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}); }catch(err){}
-    this.style.display="none"; document.getElementById("ok").style.display="block";
-  });
+ var f=document.getElementById("contacto-form");
+ if(f) f.addEventListener("submit", async function(e){
+ e.preventDefault();
+ var form=this, btn=form.querySelector("button[type=submit]"), err=document.getElementById("cf-err");
+ var data=Object.fromEntries(new FormData(form));
+ var label=btn.textContent; btn.disabled=true; btn.textContent="Enviando..."; if(err) err.style.display="none";
+ var ok=false;
+ try{ var r=await fetch("/api/contacto",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}); ok=r.ok; }catch(x){}
+ if(ok){ form.style.display="none"; document.getElementById("ok").style.display="block"; }
+ else { btn.disabled=false; btn.textContent=label; if(err) err.style.display="block"; }
+ });
 })();
 `;
 
@@ -429,6 +435,7 @@ function contactBlock(opts: string, heading: string, intro: string, num: string)
           <p class="note" style="margin-top:0">Tus datos se tratan conforme a la Ley 1581 de 2012. Te respondo en menos de 24 horas hábiles.</p>
         </form>
         <div class="ok" id="ok">¡Gracias! Recibí tu mensaje y te responderé muy pronto.</div>
+ <div class="err" id="cf-err" role="alert">No pudimos enviar tu mensaje. Intenta de nuevo en un momento o escríbeme por <a href="${WA}" target="_blank" rel="noopener">WhatsApp</a> o a contacto@oatech.com.co.</div>
       </div>
     </div>
   </div>
@@ -936,6 +943,23 @@ const FARMA = shell({
 });
 
 /* ───────────────────────── Servidor ───────────────────────── */
+const NOTIFY_TO = Bun.env.NOTIFY_EMAIL || "osvaldo.aguilar@oatech.com.co";
+const escHtml = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
+// Aviso por correo (Resend). Si falla, el registro ya quedó guardado en Postgres.
+async function notify(subject: string, fields: Record<string, unknown>, replyTo?: string) {
+ const key = Bun.env.RESEND_API_KEY;
+ if (!key) { console.warn("RESEND_API_KEY no configurada: no se envió el aviso por correo"); return; }
+ const rows = Object.entries(fields).map(([k, v]) => `<tr><td style="padding:6px 14px 6px 0;color:#56616d;vertical-align:top"><b>${escHtml(k)}</b></td><td style="padding:6px 0">${escHtml(String(v ?? "")).replace(/\n/g, "<br>")}</td></tr>`).join("");
+ try {
+ const r = await fetch("https://api.resend.com/emails", {
+ method: "POST",
+ headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+ body: JSON.stringify({ from: Bun.env.EMAIL_FROM || "OA Tech <onboarding@resend.dev>", to: [NOTIFY_TO], reply_to: replyTo || undefined, subject, html: `<div style="font-family:Arial,sans-serif;font-size:15px"><h2 style="color:#0b2540">${escHtml(subject)}</h2><table>${rows}</table></div>` }),
+ signal: AbortSignal.timeout(8000),
+ });
+ if (!r.ok) console.error("Error enviando aviso por correo:", r.status, await r.text());
+ } catch (e) { console.error("Error enviando aviso por correo:", e); }
+}
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body, null, 2), { status, headers: { "Content-Type": "application/json" } });
 const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
@@ -962,6 +986,7 @@ Bun.serve({
         const sql = await getDb();
         await sql.unsafe(`INSERT INTO oatech_contactos (nombre, empresa, email, servicio, mensaje) VALUES ($1, $2, $3, $4, $5)`, [nombre, empresa, email, servicio, mensaje]);
         console.log("Nuevo contacto OA Tech:", email, servicio);
+ await notify(`Nuevo contacto OA Tech: ${nombre}${servicio ? " · " + servicio : ""}`, { Nombre: nombre, Empresa: empresa, Correo: email, Servicio: servicio, Mensaje: mensaje }, email);
         return json({ ok: true }, 201);
       } catch (e) {
         console.error("Error guardando contacto:", e);
@@ -982,6 +1007,7 @@ Bun.serve({
         const sql = await getDb();
         await sql.unsafe(`INSERT INTO oatech_diagnosticos (nombre, empresa, email, puntaje, nivel, respuestas) VALUES ($1, $2, $3, $4, $5, $6)`, [nombre, empresa, email, puntaje, nivel, respuestas]);
         console.log("Nuevo diagnóstico OA Tech:", email, puntaje, nivel);
+ await notify(`Nuevo diagnóstico OA Tech: ${nombre} · ${nivel}`, { Nombre: nombre, Empresa: empresa, Correo: email, Puntaje: puntaje, Nivel: nivel, Respuestas: respuestas }, email);
         return json({ ok: true }, 201);
       } catch (e) {
         console.error("Error guardando diagnóstico:", e);
@@ -1037,3 +1063,4 @@ Bun.serve({
 });
 
 console.log("Escuchando: oatech-web", Bun.env.PORT || 3000);
+
